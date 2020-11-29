@@ -143,6 +143,14 @@ function events:ENCOUNTER_START(id, _, difficulty)
   end
 end
 
+function events:ENCOUNTER_END(id, _, difficulty)
+  if C_ChallengeMode.GetActiveKeystoneInfo() ~= 0 then
+    --print(("[LTSM] ignoring %d because it's detected as m+"):format(id))
+    return
+  end
+  set_spec(LTSM_API:get_default_spec())
+end
+
 local next_azerite_is_mp_box = false
 
 function events:CHALLENGE_MODE_COMPLETED()
